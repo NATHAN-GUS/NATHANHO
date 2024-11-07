@@ -211,6 +211,8 @@ L'espace disque restant sur C: est de 851,06 Go
 
 # 4. Réseau
 
+-🌞 Cartes réseau
+
 PS C:\Users\gusta> Get-NetAdapter | Select-Object Name, @{Name="IP Address";Expression={(Get-NetIPAddress -InterfaceAlias $_.Name).IPAddress}}
 
 Name                       IP Address
