@@ -452,22 +452,7 @@ mercredi 6 novembre 2024 14:13:28
 
 # 7. Ptit amusement
 
--🌞 Lister les connexions actives
 
-{PS C:\Users\gusta> $connections = Get-NetTCPConnection | Where-Object { $_.LocalAddress -ne '127.0.0.1' -and $_.RemoteAddress -ne '127.0.0.1' }| Select-Object -Property LocalAddress, RemoteAddress, State, OwningProcess
-PS C:\Users\gusta>
-PS C:\Users\gusta> $targetConnection = $connections | Where-Object { $_.LocalAddress -eq '10.188.125.136' -or $_.RemoteAddress -eq '10.188.125.136' } | Select-Object -First 1
-PS C:\Users\gusta>
-PS C:\Users\gusta> if ($null -ne $targetConnection) {
->>     $processInfo = Get-Process -Id $targetConnection.OwningProcess | Select-Object -Property Id, ProcessName
->>     $targetConnection | Add-Member -MemberType NoteProperty -Name "ProcessName" -Value $processInfo.ProcessName
->>     $targetConnection | Format-Table RemoteAddress,LocalAddress, ProcessName
->> } else {
->>     Write-Output "Aucune connexion trouvée avec l'adresse IP 10.188.125.136"
->> } 
-RemoteAddress   LocalAddress ProcessName
-------------   ------------- -----------
-162.125.8.20 10.188.125.136  Dropbox
 
 -🌞 En apprendre + sur le processus en cours d'exécution
 
