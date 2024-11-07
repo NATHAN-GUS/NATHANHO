@@ -333,7 +333,8 @@ WDAGUtilityAccount False   Compte d’utilisateur géré et utilisé par le syst
 
 
 PS C:\Users\gusta> (Get-WmiObject Win32_LogonSession | Where-Object { $_.LogonType -eq 2 }).StartTime
-20241107114057.691228+060
+
+2024 11 07 11 40 57.691228+060
 
 
 -🌞 Lister les processus en cours d'exécution
