@@ -454,7 +454,7 @@ mercredi 6 novembre 2024 14:13:28
 
 -🌞 Lister les connexions actives
 
-PS C:\Users\gusta> $connections = Get-NetTCPConnection | Where-Object { $_.LocalAddress -ne '127.0.0.1' -and $_.RemoteAddress -ne '127.0.0.1' }
+{PS C:\Users\gusta> $connections = Get-NetTCPConnection | Where-Object { $_.LocalAddress -ne '127.0.0.1' -and $_.RemoteAddress -ne '127.0.0.1' }
 | Select-Object -Property LocalAddress, RemoteAddress, State, OwningProcess
 
 PS C:\Users\gusta>
