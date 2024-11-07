@@ -520,6 +520,12 @@ Spotify --12176   83566592 gusta
 
 -🌞 En apprendre + sur le programme
 
+PS C:\Users\gusta> Get-Acl "C:\Program Files\Google\Chrome\Application" | Select Owner
+
+Owner
+-----
+BUILTIN\Administrateurs
+
 
 
 
