@@ -405,16 +405,7 @@ BUILTIN\Administrateurs
  
  
  
- 
- 
- 
- 
- 
- 
- 
-
-
-# 6.Random
+ # 6.Random
 -🌞 Uptime
 
 PS C:\Users\gusta> (Get-CimInstance -ClassName Win32_OperatingSystem).LastBootUpTime
@@ -488,9 +479,9 @@ PS C:\Users\gusta> Get-Process -Name "Spotify" | ForEach-Object {
 
 Name       Id WorkingSet User
 ----       -- ---------- ----
-Spotify 10008   53407744 gusta
+Spotify --10008   53407744 gusta
 
-Spotify 12176   83566592 gusta
+Spotify --12176   83566592 gusta
 ------           ------   ---
 
 
