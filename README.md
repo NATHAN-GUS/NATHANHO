@@ -332,6 +332,10 @@ WDAGUtilityAccount False   Compte d’utilisateur géré et utilisé par le syst
 -🌞 Heure de login
 
 
+PS C:\Users\gusta> (Get-WmiObject Win32_LogonSession | Where-Object { $_.LogonType -eq 2 }).StartTime
+20241107114057.691228+060
+
+
 -🌞 Lister les processus en cours d'exécution
 
 PS C:\Users\gusta> Get-WmiObject Win32_Process | Select-Object Name, @{Name="UserName";Expression={(Get-WmiObject Win32_Process -Filter "ProcessId=$($_.ProcessId)").GetOwner().User}}
