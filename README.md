@@ -452,6 +452,50 @@ mercredi 6 novembre 2024 14:13:28
 
 # 7. Ptit amusement
 
+-🌞 Lister les connexions actives
+
+Get-NetTCPConnection | Where-Object {$.LocalAddress -eq "10.188.125.136"} | ForEach-Object { $process = Get-Process -Id $.OwningProcess [PSCustomObject]@{ LocalAddress = $.LocalAddress RemoteAddress = $.RemoteAddress ProcessName = $process.ProcessName } } | Format-Table -AutoSize
+
+[LocalAddress RemoteAddress ProcessName
+
+10.188.125.136 23.33.90.78 DSAService
+
+10.188.125.136 152.199.19.160 Code
+
+10.188.125.136 35.186.224.26 Spotify
+
+10.188.125.136 140.82.113.26 chrome
+
+10.188.125.136 216.58.214.174 chrome
+
+10.188.125.136 216.239.32.36 chrome
+
+10.188.125.136 142.250.75.238 chrome
+
+10.188.125.136 104.26.9.72 brave
+
+10.188.125.136 172.64.69.88 msedge
+
+10.188.125.136 172.64.69.88 msedge
+
+10.188.125.136 162.125.21.2 Dropbox
+
+10.188.125.136 162.125.21.3 Dropbox
+
+10.188.125.136 157.240.203.60 WhatsApp
+
+10.188.125.136 185.60.219.60 WhatsApp
+
+10.188.125.136 163.70.128.60 WhatsApp
+
+10.188.125.136 31.13.86.51 WhatsApp
+
+10.188.125.136 199.232.170.217 msedge
+
+10.188.125.136 104.18.1.46 msedge
+
+10.188.125.136 35.186.224.24 Spotify]
+
 
 
 -🌞 En apprendre + sur le processus en cours d'exécution
@@ -462,7 +506,7 @@ PS C:\Users\gusta> Get-Process -Name "Spotify" | ForEach-Object {
 >>     $_ | Select-Object Name, Id, WorkingSet, @{Name="User";Expression={$user}}
 >> }
 
-Name       Id WorkingSet User
+Name       Id ----WorkingSet User
 ----       -- ---------- ----
 Spotify --10008   53407744 gusta
 
