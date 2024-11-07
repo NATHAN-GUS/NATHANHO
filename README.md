@@ -191,8 +191,11 @@ PS C:\Users\gusta> Get-partition
 PartitionNumber  DriveLetter Offset                                        Size Type
 ---------------  ----------- ------                                        ---- ----
 1                           1048576                                     260 MB System
+
 2                           273678336                                    16 MB Reserved
+
 3                C           290455552                                 952.6 GB Basic
+
 4                           1023135449088                                 1 GB Recovery
  
  	
