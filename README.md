@@ -1,4 +1,3 @@
-
 # TP1 : Plip plap votre OS
 
 ## 1. Programme, service, processus
@@ -150,6 +149,13 @@ Stopped  dcsvc              Service de configuration (DC) déclaré
 [* afficher la quantité de RAM totale de la machine : (Get-CimInstance -ClassName Win32_ComputerSystem).TotalPhysicalMemory / 1MB
 16088,0546875
 * afficherla quantité de RAM libre sur la machine ]
+
+
+PS C:\Users\gusta> Get-WmiObject -Class Win32_OperatingSystem | Select-Object FreePhysicalMemory
+
+FreePhysicalMemory
+------------------
+           2972464
 
 
 
@@ -534,6 +540,7 @@ NetRoute (NextHop)     : 10.188.0.1
 PingSucceeded          : False
 
 PingReplyDetails (RTT) : 0 ms
+
 
 
 
