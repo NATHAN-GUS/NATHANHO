@@ -58,5 +58,7 @@ Retype new password:
 
 passwd: password updated successfully
 
+### B. Infos enregistrées par le système
+
 
  
