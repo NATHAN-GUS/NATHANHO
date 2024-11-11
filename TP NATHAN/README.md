@@ -4,3 +4,5 @@
 
 ## 1. Fichiers
 ### A. Find me
+
+-  ####🌞 Trouver le chemin vers le répertoire personnel de votre utilisateur
