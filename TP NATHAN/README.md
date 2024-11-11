@@ -49,9 +49,13 @@ find /etc/ssh/sshd_config :
 #### 🌞 Créer un nouvel utilisateur
 
 useradd -m -d /home/papier_alu/ marmotte
+
 passwd marmotte
+
 New password:
+
 Retype new password:
+
 passwd: password updated successfully
 
 
