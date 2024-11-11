@@ -7,6 +7,7 @@
 
 #### 🌞 Trouver le chemin vers le répertoire personnel de votre utilisateur
  pwd :
+ 
  /home/nathan
 
 #### 🌞 Vérifier les permissions du répertoire personnel de votre utilisateurs
@@ -43,6 +44,15 @@ drwxr-xr-x 2 nathan nathan     4096 Nov  9 14:48 Videos
 find /etc/ssh/sshd_config :
 
 /etc/ssh/sshd_config
+
+## 2. Users
+#### 🌞 Créer un nouvel utilisateur
+
+useradd -m -d /home/papier_alu/ marmotte
+passwd marmotte
+New password:
+Retype new password:
+passwd: password updated successfully
 
 
  
