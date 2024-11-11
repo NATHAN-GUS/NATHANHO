@@ -1,3 +1,3 @@
-## TP2 : Le terminal vous a déjà manqué non
+# TP2 : Le terminal vous a déjà manqué non
 
-# II. Files and users
+## II. Files and users
