@@ -6,11 +6,11 @@
 ### A. Find me
 
 #### 🌞 Trouver le chemin vers le répertoire personnel de votre utilisateur
- pwd 
+ pwd :
  /home/nathan
 
 #### 🌞 Vérifier les permissions du répertoire personnel de votre utilisateurs
-ls -l /home/nathan 
+ls -l /home/nathan :
 
  total 18056
  
@@ -41,6 +41,7 @@ drwxr-xr-x 2 nathan nathan     4096 Nov  9 14:48 Videos
 
 #### 🌞 Trouver le chemin du fichier de configuration du serveur SSH
 find /etc/ssh/sshd_config :
+
 /etc/ssh/sshd_config
 
 
