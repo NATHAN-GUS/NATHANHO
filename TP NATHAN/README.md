@@ -40,7 +40,7 @@ drwxr-xr-x 2 nathan nathan     4096 Nov  9 14:48 Templates
 drwxr-xr-x 2 nathan nathan     4096 Nov  9 14:48 Videos
 
 #### 🌞 Trouver le chemin du fichier de configuration du serveur SSH
-find /etc/ssh/sshd_config 
+find /etc/ssh/sshd_config :
 /etc/ssh/sshd_config
 
 
