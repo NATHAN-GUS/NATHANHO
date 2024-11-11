@@ -46,6 +46,7 @@ find /etc/ssh/sshd_config :
 /etc/ssh/sshd_config
 
 ## 2. Users
+
 #### 🌞 Créer un nouvel utilisateur
 
 useradd -m -d /home/papier_alu/ marmotte
@@ -59,6 +60,21 @@ Retype new password:
 passwd: password updated successfully
 
 ### B. Infos enregistrées par le système
+
+#### 🌞 Prouver que cet utilisateur a été créé
+ cat /etc/passwd | grep marmotte
+ 
+marmotte:x:1001:1001::/home/papier_alu/:/bin/sh
+
+#### 🌞 Déterminer le hash du password de l'utilisateur marmotte
+cat /etc/shadow | grep marmotte
+
+marmotte:$y$j9T$rNeIV1dLfSitBbgU3vhQS/$Y19D4LxtUeZIGV3yrvv5CfnqIAyqXbpXO.7.b2ADPO7:20038:0:99999:7:::
+
+### C. Hint sur la ligne de commande
+
+
+
 
 
  
