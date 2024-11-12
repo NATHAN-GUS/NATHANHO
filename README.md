@@ -327,7 +327,7 @@ LocalAddress         ----------State --------ProcessName
 # 5. Utilisateurs
 
 🌞 Lister les utilisateurs de la machine
-`` sh
+``` sh
 
 PS C:\Users\gusta> Get-LocalUser
 
