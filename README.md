@@ -43,6 +43,7 @@ AcerService             --     6476
 
 ## 🌞 Trouver les 3 processus qui ont le plus petit identifiant
 
+```sh
 
 PS C:\Users\gusta> Get-Process | Sort-Object Id | Select-Object -First 3 | Format-Table ProcessName, ID
 
@@ -53,10 +54,11 @@ Idle         -------------   0
 System      ----------    4
 
 Secure System-- 172
+```
 
 
  ## 🌞 Lister tous les services de la machine...
-
+```sh
 #PS C:\Users\gusta> Get-Service | Where-Object { $_.Status -eq "Running" }
 
 Status  - Name       --        DisplayName
@@ -94,10 +96,8 @@ Running  Audiosrv           Audio Windows
 Running  BDESVC             Service de chiffrement de lecteur B...
 
 Running  BFE                Moteur de filtrage de base
-
-
-
-
+```
+```sh
 
 #PS C:\Users\gusta> Get-Service | Where-Object { $_.Status -eq "Stopped" }
 
@@ -140,10 +140,12 @@ Stopped  dbupdate           Service Mise à jour Dropbox (dbupdate)
 Stopped  dbupdatem          Service Mise à jour Dropbox (dbupda...
 
 Stopped  dcsvc              Service de configuration (DC) déclaré
+```
 
 
 
 # 2. Mémoire et CPU
+```sh
 
 -🌞 RAM
 
@@ -158,8 +160,9 @@ PS C:\Users\gusta> Get-WmiObject -Class Win32_OperatingSystem | Select-Object Fr
 FreePhysicalMemory
 ------------------
            2972464
+```
 
-
+```sh
 -🌞 CPU
 
 * afficher l'utilisation du CPU
@@ -169,8 +172,10 @@ PS C:\Users\gusta> Get-WmiObject Win32_Processor | Select-Object LoadPercentage
 LoadPercentage
 
              3
+```
 
 # 3. Stockage
+```sh
 
 🌞 Périphériques
 
@@ -180,8 +185,10 @@ FriendlyName, Size
                           
                           NVMe Micron_2450_MTFDKBA1T0TFK 1024209543168
 -------------------------------------------------------------
+```
 
 -🌞 Partitions
+```sh
 
 PS C:\Users\gusta> Get-partition
 
@@ -199,8 +206,10 @@ PartitionNumber  DriveLetter Offset                                        Size 
 
 4                           1023135449088                                 1 GB Recovery
  
- 	
+ 	```
+
  -🌞 Espace disque
+```sh
  PS C:\Users\gusta> $ListDisk = Get-WmiObject -Class Win32_LogicalDisk
 PS C:\Users\gusta>
 PS C:\Users\gusta> Foreach($Disk in $ListDisk){
@@ -208,11 +217,12 @@ PS C:\Users\gusta> Foreach($Disk in $ListDisk){
 >>    Write-Host "L'espace disque restant sur $($Disk.DeviceID) est de $DiskFreeSpace Go"
 >> }
 L'espace disque restant sur C: est de 851,06 Go
-
+```
 
 # 4. Réseau
 
 -🌞 Cartes réseau
+```sh
 
 PS C:\Users\gusta> Get-NetAdapter | Select-Object Name, @{Name="IP Address";Expression={(Get-NetIPAddress -InterfaceAlias $_.Name).IPAddress}}
 
@@ -225,9 +235,11 @@ Ethernet                   169.254.246.24
 Ethernet 2                 {fe80::cd5a:d4a4:7842:8f5b%5, 192.168.56.1}
 
 Wi-Fi                      10.188.125.136
+```
 
  
  -🌞 Connexions réseau
+ ```sh 
  
  
 PS C:\Users\gusta> Get-NetTCPConnection -State Established | Select-Object LocalAddress, State, @{Name="ProcessName";Expression={(Get-Process -Id $_.OwningProcess).Name}}
@@ -309,11 +321,13 @@ LocalAddress         ----------State --------ProcessName
 ------127.0.0.1      -----Established -----AcerSysMoni...
 
 ------127.0.0.1      -----Established------AcerQAAgent
+```
 
 
 # 5. Utilisateurs
 
 🌞 Lister les utilisateurs de la machine
+`` sh
 
 PS C:\Users\gusta> Get-LocalUser
 
@@ -328,17 +342,21 @@ gusta              True
 Invité             False   Compte d’utilisateur invité
 
 WDAGUtilityAccount False   Compte d’utilisateur géré et utilisé par le système pour les scénarios Windows Defender A...
+```
 
 
 -🌞 Heure de login
+```sh
 
 
 PS C:\Users\gusta> (Get-WmiObject Win32_LogonSession | Where-Object { $_.LogonType -eq 2 }).StartTime
 
 2024 11 07 11 40 57.691228+060
+```
 
 
 -🌞 Lister les processus en cours d'exécution
+```sh
 
 PS C:\Users\gusta> Get-WmiObject Win32_Process | Select-Object Name, @{Name="UserName";Expression={(Get-WmiObject Win32_Process -Filter "ProcessId=$($_.ProcessId)").GetOwner().User}}
 
@@ -403,40 +421,50 @@ DropboxUpdate.exe
 DropboxCrashHand...
 
 explorer.exe        ---------gusta
+```
 
 
 -🌞 Sur un fichier random qui se trouve dans votre dossier Téléchargements/
 
+```sh
 PS C:\Users\gusta> Get-Acl "C:\wamp" | Select Owner
 
 Owner
 
 BUILTIN\Administrateurs
+```
  
  
  
  # 6.Random
+ ```sh
 -🌞 Uptime
 
 PS C:\Users\gusta> (Get-CimInstance -ClassName Win32_OperatingSystem).LastBootUpTime
 
 mercredi 6 novembre 2024 15:02:34
+```
 
 
 -🌞 Device]
+```sh
 * afficher le modèle du processeur de la machine
 
 PS C:\Users\gusta> Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Name
 [12th Gen Intel(R) Core(TM) i7-12650H]
+```
 
 -🌞 Version
+```sh
 
 PS C:\Users\gusta> Get-CimInstance -Class Win32_OperatingSystem | Select-Object Caption, BuildNumber
 
 [Caption                      BuildNumber
 Mi-crosoft Windows 11 Famille 22631]
+```
 
 -🌞 Mise à jour
+```sh
 
 PS C:\Users\gusta> function Get-WuaHistory {
 >>     $session = (New-Object -ComObject 'Microsoft.Update.Session')
@@ -459,9 +487,10 @@ PS C:\Users\gusta>
 PS C:\Users\gusta> (Get-WuaHistory).Date
 
 mercredi 6 novembre 2024 14:13:28
+```
 
 # 7. Ptit amusement
-
+```sh
 -🌞 Lister les connexions actives
 
 Get-NetTCPConnection | Where-Object {$.LocalAddress -eq "10.188.125.136"} | ForEach-Object { $process = Get-Process -Id $.OwningProcess [PSCustomObject]@{ LocalAddress = $.LocalAddress RemoteAddress = $.RemoteAddress ProcessName = $process.ProcessName } } | Format-Table -AutoSize
@@ -505,10 +534,12 @@ Get-NetTCPConnection | Where-Object {$.LocalAddress -eq "10.188.125.136"} | ForE
 10.188.125.136 104.18.1.46 msedge
 
 10.188.125.136 35.186.224.24 Spotify]
+```
 
 
 
 -🌞 En apprendre + sur le processus en cours d'exécution
+```sh
 
 PS C:\Users\gusta> Get-Process -Name "Spotify" | ForEach-Object {
 >>     $wmi = Get-WmiObject Win32_Process -Filter "ProcessId = $($_.Id)"
@@ -522,23 +553,21 @@ Spotify --10008   53407744 gusta
 
 Spotify --12176   83566592 gusta
 ------           ------   ---
+```
 
 
 -🌞 En apprendre + sur le programme
+```sh
 
 PS C:\Users\gusta> Get-Acl "C:\Program Files\Google\Chrome\Application" | Select Owner
 
 Owner
 -----
 BUILTIN\Administrateurs
-
-
-
-
-
+```
 
 🌞 En apprendre + sur l'adresse IP
-
+```sh
 PS C:\Users\gusta> Invoke-RestMethod -Method Get -Uri http://ip-api.com/json/13.37.13.37
 
 status      : success
@@ -550,11 +579,12 @@ zip         : 75000                                                             
 lon         : 2,35222                                                                   timezone    : Europe/Paris  
 isp         : Amazon Technologies Inc.                                                  org         : AWS EC2 (eu-west-3)                                                   
 as          : AS16509 Amazon.com, Inc.                                          
-query       : 13.37.13.37  
+query       : 13.37.13.37
+```
 
 
 -🌞 Délai
-
+```sh
 PS C:\Users\gusta> Test-NetConnection -ComputerName 13.37.13.37 -InformationLevel Detailed
 AVERTISSEMENT : Ping to 13.37.13.37 failed with status: TimedOut
 
@@ -576,7 +606,7 @@ NetRoute (NextHop)     : 10.188.0.1
 PingSucceeded          : False
 
 PingReplyDetails (RTT) : 0 ms
-
+```
 
 
 
