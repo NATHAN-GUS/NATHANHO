@@ -337,6 +337,7 @@ dawa/folder36/40/file43
   ```sh
   root@ServeurDebian:~# find dawa -type f |awk -F / 'NF==7'
   dawa/folder37/45/23/43/54/file43
+  ```
   
 
 
