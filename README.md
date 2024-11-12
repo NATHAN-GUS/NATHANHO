@@ -5,7 +5,7 @@
 
 ## 🌞 Lister tous les processus en cours d'exécution sur votre machine
 
-
+```sh
 PS C:\Users\gusta> get-process | select ProcessName, Id| sort-object -proper
 ty ProcessName
 
@@ -38,6 +38,7 @@ AcerSense              --     16520
 AcerSense              --     16720
 
 AcerService             --     6476
+```
 
 
 ## 🌞 Trouver les 3 processus qui ont le plus petit identifiant
