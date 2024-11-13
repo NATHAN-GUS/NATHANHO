@@ -25,7 +25,7 @@ drwxr-xr-x 2 nathan nathan     4096 Nov  9 14:48 Videos
  🌞 Trouver le chemin du fichier de configuration du serveur SSH
 ```sh
 Last login: Mon Nov 11 17:47:47 2024 from 192.168.202.1
-nathan@ServeurDebian:~$ find / -name sshd_config 2> /dev/null
+[nathan@ServeurDebian]:~$ find / -name sshd_config 2> /dev/null
 /etc/ssh/sshd_config
 /snap/core22/1663/etc/ssh/sshd_config
 /snap/core22/1663/usr/share/openssh/sshd_config
@@ -39,7 +39,7 @@ nathan@ServeurDebian:~$ find / -name sshd_config 2> /dev/null
  🌞 Créer un nouvel utilisateur
 
 ```sh
-root@ServeurDebian:~# useradd -m -d /home/papier_alu/ marmotte
+[root@ServeurDebian:]~# useradd -m -d /home/papier_alu/ marmotte
 root@ServeurDebian:~# passwd marmotte
 New password:
 Retype new password:
