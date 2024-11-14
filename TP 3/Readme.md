@@ -534,7 +534,7 @@ nathan@ServeurDebian:/etc/systemd/system$  systemctl status meow_web.service
 ```
 
 🌞 Déterminer le PID du processus Python en cours d'exécution
-`` sh
+```sh
 nathan@ServeurDebian:/$ ps -ef | grep http.server | grep root
 root        6631       1  0 Nov13 ?        00:00:07 /usr/bin/python3 -m http.server 8888
 ```
