@@ -113,8 +113,62 @@ picasso@NathanDebian:~$ sudo pvcreate /dev/sdc
 
 🌞 Créer un VG nommé cat
 ```sh
+picasso@NathanDebian:~$ sudo vgcreate cat /dev/sdb /dev/sdc
+  Volume group "cat" successfully created
 ```
+* Verification
+  ```sh
+  picasso@NathanDebian:~$ sudo vgs
+  VG     #PV #LV #SN Attr   VSize   VFree
+  cat      2   0   0 wz--n-  19.99g 19.99g
+  nathan   1   5   0 wz--n- <20.00g     0
+  ```
+  ```sh
+  picasso@NathanDebian:~$ sudo vgdisplay
+  --- Volume group ---
+  VG Name               cat
+  System ID
+  Format                lvm2
+  Metadata Areas        2
+  Metadata Sequence No  1
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                0
+  Open LV               0
+  Max PV                0
+  Cur PV                2
+  Act PV                2
+  VG Size               19.99 GiB
+  PE Size               4.00 MiB
+  Total PE              5118
+  Alloc PE / Size       0 / 0
+  Free  PE / Size       5118 / 19.99 GiB
+  VG UUID               f1YvIK-Bhkm-rk3c-BCv7-PrG5-XHiI-F2VKzw
 
+  --- Volume group ---
+  VG Name               nathan
+  System ID
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  7
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                5
+  Open LV               4
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <20.00 GiB
+  PE Size               4.00 MiB
+  Total PE              5119
+  Alloc PE / Size       5119 / <20.00 GiB
+  Free  PE / Size       0 / 0
+  VG UUID               nYYsYS-Ze21-RSSB-iGJN-o10V-19Zp-s70AjE
+  ```
+  
+ 
 🌞 Créer un LV nommé meoooow
 ```sh
 picasso@NathanDebian:~$ sudo lvcreate -L 3G cat -n meoooow
@@ -165,7 +219,18 @@ tmpfs                    392M  140K  392M   1% /run/user/1000
 
 🌞 Il reste 2G sur le disque dur principal
 ```sh
+picasso@NathanDebian:~$ sudo lvextend -L +2G /dev/nathan/home
+  Size of logical volume nathan/home changed from <1.86 GiB (476 extents) to <3.86 GiB (988 extents).
+  Logical volume nathan/home successfully resized.
+crea@debian:~$ sudo resize2fs /dev/nathan/home
+resize2fs 1.47.0 (5-Feb-2023)
+Filesystem at /dev/nathan/home is mounted on /home; on-line resizing required
+old_desc_blocks = 1, new_desc_blocks = 1
+The filesystem on /dev/nathan/home is now 1011712 (4k) blocks long.  
 
+picasso@NathanDebian:~$ df -h /home
+Filesystem                Size  Used Avail Use% Mounted on
+/dev/mapper/nathan-home  3.8G  1.7M  3.6G   1% /home
 ```
 
 🌞 Agrandir la partition meoooow pour qu'elle occupe tout l'espace libre de son VG
@@ -206,8 +271,6 @@ picasso@NathanDebian:~$ df -h /dev/cat/meoooow
 Filesystem               Size  Used Avail Use% Mounted on
 /dev/mapper/cat-meoooow   20G  176M   20G   1% /mnt/meow
 ```
-
-
 
 
 ## 3. Montage automatique
