@@ -349,6 +349,12 @@ Connection to 192.168.202.5 closed.
 ⭐ Déterminer quelles options de montage permettrait d'améliorer le niveau de sécurité des données contenues sur une partition.
 ```sh
 
+Option nodev: Qui empêche la création de périphériques spéciaux sur la partition, ce qui réduit le risque d'attaques liées aux périphériques;
+Option noatime: Qui désactive la mise à jour du timestamp d'accès. Cela peut améliorer les performances et réduire la fragmentation du disque, mais cela peut également rendre plus difficile le suivi de l'activité des fichiers;
+Option (ACL) :  fournit un mécanisme de permission supplémentaire et plus flexible pour les systèmes de fichiers.
+Les ACL sont un deuxième niveau de permissions discrétionnaires, qui peuvent remplacer les permissions standards ugo/rwx.
+Lorsqu’elles sont utilisées correctement, elles peuvent vous accorder une meilleure granularité dans la définition de l’accès à un fichier ou à un répertoire, par exemple en donnant ou en refusant l’accès à un utilisateur spécifique qui n’est ni le propriétaire du fichier, ni le propriétaire du groupe.
+
 
 
 
