@@ -165,7 +165,49 @@ tmpfs                    392M  140K  392M   1% /run/user/1000
 
 🌞 Il reste 2G sur le disque dur principal
 ```sh
+
 ```
+
+🌞 Agrandir la partition meoooow pour qu'elle occupe tout l'espace libre de son VG
+```sh
+picasso@NathanDebian:~$ sudo lvextend -l +100%FREE /dev/cat/meoooow
+  New size (5118 extents) matches existing size (5118 extents).
+picasso@NathanDebian:~$ lsblk
+NAME                   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+sda                      8:0    0   20G  0 disk
+└─sda1                   8:1    0   20G  0 part
+  ├─nathan-root        254:1    0  9.3G  0 lvm  /
+  ├─nathan-Swap        254:2    0  1.9G  0 lvm  [SWAP]
+  ├─nathan-home        254:3    0  3.2G  0 lvm  /home
+  ├─nathan-var         254:4    0  2.8G  0 lvm  /var
+  └─nathan-Espacelibre 254:5    0  2.8G  0 lvm
+sdb                      8:16   0   10G  0 disk
+└─cat-meoooow          254:0    0   20G  0 lvm  /mnt/meow
+sdc                      8:32   0   10G  0 disk
+└─cat-meoooow          254:0    0   20G  0 lvm  /mnt/meow
+sr0                     11:0    1 1024M  0 rom
+picasso@NathanDebian:~$  sudo xfs_growfs /dev/cat/meoooow
+meta-data=/dev/mapper/cat-meoooow isize=512    agcount=4, agsize=196608 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=1    bigtime=1 inobtcount=1 nrext64=0
+data     =                       bsize=4096   blocks=786432, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=16384, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+data blocks changed from 786432 to 5240832
+```
+
+🌞  Déterminer la taille de la nouvelle partition
+```sh
+picasso@NathanDebian:~$ df -h /dev/cat/meoooow
+Filesystem               Size  Used Avail Use% Mounted on
+/dev/mapper/cat-meoooow   20G  176M   20G   1% /mnt/meow
+```
+
+
 
 
 ## 3. Montage automatique
