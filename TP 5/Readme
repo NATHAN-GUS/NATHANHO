@@ -9758,6 +9758,362 @@ nathan@ServeurDebian:~/work$ ./hello4
 ```
 
 
+## II. Ptits challenges de cracking
+🌞 Avec une commande apt search, déterminez si le paquet ghidra est disponible
+```sh
+nathan@ServeurDebian:~/work$ apt search ghidra
+Sorting... Done
+Full Text Search... Done
+```
+🌞 Ajouter l'URL des dépôts Kali à vos dépôts existants
+
+```sh
+nathan@ServeurDebian:~$ sudo nano /etc/apt/sources.list
+
+#deb cdrom:[Debian GNU/Linux 12.7.0 _Bookworm_ - Official amd64 NETINST with firmware 20240831-10:38]/ bookworm contrib main non-free-firmware
+
+deb http://deb.debian.org/debian/ bookworm main non-free-firmware
+deb-src http://deb.debian.org/debian/ bookworm main non-free-firmware
+
+deb http://security.debian.org/debian-security bookworm-security main non-free-firmware
+deb-src http://security.debian.org/debian-security bookworm-security main non-free-firmware
+
+# bookworm-updates, to get updates before a point release is made;
+# see https://www.debian.org/doc/manuals/debian-reference/ch02.en.html#_updates_and_backports
+deb http://deb.debian.org/debian/ bookworm-updates main non-free-firmware
+deb-src http://deb.debian.org/debian/ bookworm-updates main non-free-firmware
+deb http://http.kali.org/kali kali-rolling main contrib non-free non-free-firmware
+
+# This system was installed using small removable media
+# (e.g. netinst, live or single CD). The matching "deb cdrom"
+# entries were disabled at the end of the installation process.
+# For information about how to configure apt package sources,
+# see the sources.list(5) manual.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                     [ Read 19 lines ]
+^G Help          ^O Write Out     ^W Where Is      ^K Cut           ^T Execute       ^C Location      M-U Undo         M-A Set Mark     M-] To Bracket
+^X Exit          ^R Read File     ^\ Replace       ^U Paste         ^J Justify       ^/ Go To Line    M-E Redo         M-6 Copy         ^Q Where Was        
+```
+🌞 Ajoutez la clé publique des gars de chez Kali
+```sh
+nathan@ServeurDebian:~/work$ sudo wget https://archive.kali.org/archive-key.asc -O /etc/apt/trusted.gpg.d/kali-archive-keyring.asc
+--2024-11-27 14:11:18--  https://archive.kali.org/archive-key.asc
+Resolving archive.kali.org (archive.kali.org)... 192.99.45.140, 2607:5300:60:508c::
+Connecting to archive.kali.org (archive.kali.org)|192.99.45.140|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3155 (3.1K) [application/octet-stream]
+Saving to: ‘/etc/apt/trusted.gpg.d/kali-archive-keyring.asc’
+
+/etc/apt/trusted.gpg.d/kali-archive-ke 100%[============================================================================>]   3.08K  --.-KB/s    in 0s
+
+2024-11-27 14:11:18 (111 MB/s) - ‘/etc/apt/trusted.gpg.d/kali-archive-keyring.asc’ saved [3155/3155]
+```
+
+🌞 Mettez à jour la liste des dépôts que votre OS connaît actuellement
+```sh
+nathan@ServeurDebian:~/work$ sudo apt update -y
+Hit:1 https://packages.mozilla.org/apt mozilla InRelease
+Hit:2 http://deb.debian.org/debian bookworm InRelease
+Hit:3 http://deb.debian.org/debian bookworm-updates InRelease
+Hit:4 http://security.debian.org/debian-security bookworm-security InRelease
+Get:5 http://kali.download/kali kali-rolling InRelease [41.5 kB]
+Get:6 http://kali.download/kali kali-rolling/main amd64 Packages [20.3 MB]
+Get:7 http://kali.download/kali kali-rolling/contrib amd64 Packages [102 kB]
+Get:8 http://kali.download/kali kali-rolling/non-free amd64 Packages [196 kB]
+Get:9 http://kali.download/kali kali-rolling/non-free-firmware amd64 Packages [10.6 kB]
+Fetched 20.6 MB in 16s (1,301 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+961 packages can be upgraded. Run 'apt list --upgradable' to see them.
+```
+🌞 Avec une commande apt search, déterminez si le paquet ghidra est disponible
+```sh
+nathan@ServeurDebian:~/work$ apt search ghidra
+Sorting... Done
+Full Text Search... Done
+ghidra/kali-rolling 11.0+ds-0kali1 amd64
+  Software Reverse Engineering Framework
+
+ghidra-data/kali-rolling 10.5-0kali1 all
+  FID databases for Ghidra
+
+ghidra-dbgsym/kali-rolling 11.0+ds-0kali1 amd64
+  debug symbols for ghidra
+
+quark-engine/kali-rolling 23.9.1-0kali2 all
+  Android Malware (Analysis | Scoring System)
+
+rz-ghidra/kali-rolling 0.7.0-0kali1+b1 amd64
+  ghidra decompiler and sleigh disassembler for rizin
+
+rz-ghidra-dbgsym/kali-rolling 0.7.0-0kali1+b1 amd64
+  debug symbols for rz-ghidra
+```
+🌞 Installez le paquet ghidra
+```sh
+nathan@ServeurDebian:~/work$ sudo apt-get install ghidra
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  bsdextrautils bsdutils eject fdisk ghidra-data libblkid1 libfdisk1 libice-dev libmount1 libsm-dev libsmartcols1 libuuid1 libx11-dev libxau-dev
+  libxcb1-dev libxdmcp-dev libxt-dev login mount openjdk-17-jdk openjdk-17-jdk-headless util-linux util-linux-extra util-linux-locales uuid-dev
+  x11proto-dev xorg-sgml-doctools xtrans-dev
+Suggested packages:
+  libice-doc cryptsetup-bin libsm-doc uuid-runtime libx11-doc libxcb-doc libxt-doc nfs-common openjdk-17-demo openjdk-17-source visualvm wtmpdb
+The following NEW packages will be installed:
+  ghidra ghidra-data libice-dev libsm-dev libx11-dev libxau-dev libxcb1-dev libxdmcp-dev libxt-dev openjdk-17-jdk openjdk-17-jdk-headless uuid-dev
+  x11proto-dev xorg-sgml-doctools xtrans-dev
+The following packages will be upgraded:
+  bsdextrautils bsdutils eject fdisk libblkid1 libfdisk1 libmount1 libsmartcols1 libuuid1 login mount util-linux util-linux-extra util-linux-locales
+14 upgraded, 15 newly installed, 0 to remove and 947 not upgraded.
+Need to get 503 MB of archives.
+After this operation, 1,251 MB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://kali.download/kali kali-rolling/main amd64 bsdutils amd64 1:2.40.2-11 [105 kB]
+Get:2 http://http.kali.org/kali kali-rolling/main amd64 login amd64 1:4.16.0-2+really2.40.2-11 [81.5 kB]
+Get:4 http://kali.download/kali kali-rolling/main amd64 bsdextrautils amd64 2.40.2-11 [91.5 kB]
+Get:6 http://kali.download/kali kali-rolling/main amd64 fdisk amd64 2.40.2-11 [153 kB]
+Get:7 http://kali.download/kali kali-rolling/main amd64 libsmartcols1 amd64 2.40.2-11 [139 kB]
+Get:9 http://kali.download/kali kali-rolling/main amd64 libmount1 amd64 2.40.2-11 [199 kB]
+Get:15 http://http.kali.org/kali kali-rolling/main amd64 openjdk-17-jdk amd64 17.0.13+11-2 [2,388 kB]
+Get:16 http://http.kali.org/kali kali-rolling/main amd64 ghidra amd64 11.0+ds-0kali1 [343 MB]
+Get:8 http://archive-4.kali.org/kali kali-rolling/main amd64 libblkid1 amd64 2.40.2-11 [168 kB]
+Get:12 http://archive-4.kali.org/kali kali-rolling/main amd64 util-linux amd64 2.40.2-11 [1,213 kB]
+Get:23 http://http.kali.org/kali kali-rolling/main amd64 libxdmcp-dev amd64 1:1.1.2-3+b2 [40.8 kB]
+Get:3 http://ftp.free.fr/pub/kali kali-rolling/main amd64 eject amd64 2.40.2-11 [59.5 kB]
+Get:5 http://ftp.free.fr/pub/kali kali-rolling/main amd64 util-linux-extra amd64 2.40.2-11 [265 kB]
+Get:10 http://ftp.free.fr/pub/kali kali-rolling/main amd64 mount amd64 2.40.2-11 [155 kB]
+Get:11 http://ftp.free.fr/pub/kali kali-rolling/main amd64 libuuid1 amd64 2.40.2-11 [35.9 kB]
+Get:13 http://ftp.free.fr/pub/kali kali-rolling/main amd64 libfdisk1 amd64 2.40.2-11 [210 kB]
+Get:14 http://http.kali.org/kali kali-rolling/main amd64 openjdk-17-jdk-headless amd64 17.0.13+11-2 [71.6 MB]
+Get:28 http://deb.debian.org/debian bookworm/main amd64 xorg-sgml-doctools all 1:1.11-1.1 [22.1 kB]
+Get:29 http://deb.debian.org/debian bookworm/main amd64 xtrans-dev all 1.4.0-1 [98.7 kB]
+71% [14 openjdk-17-jdk-headless 34.1 MB/71.6 MB 48%] [16 ghidra 334 MB/343 MB 97%]                                                           8,756 kB/s 14s^Get:17 http://kali.download/kali kali-rolling/main amd64 ghidra-data all 10.5-0kali1 [78.1 MB]
+77% [14 openjdk-17-jdk-headless 36.7 MB/71.6 MB 51%] [17 ghidra-data 19.0 MB/78.1 MB 24%]                                                    7,184 kB/s 13s^78% [14 openjdk-17-jdk-headless 37.5 MB/71.6 MB 52%] [17 ghidra-data 26.4 MB/78.1 MB 34%]                                                    7,184 kB/s 12s^Get:19 http://kali.download/kali kali-rolling/main amd64 libice-dev amd64 2:1.1.1-1 [73.8 kB]
+Get:21 http://kali.download/kali kali-rolling/main amd64 libsm-dev amd64 2:1.2.4-1 [37.7 kB]
+Get:22 http://kali.download/kali kali-rolling/main amd64 libxau-dev amd64 1:1.0.11-1 [23.6 kB]
+Get:24 http://http.kali.org/kali kali-rolling/main amd64 libxcb1-dev amd64 1.17.0-2+b1 [181 kB]
+Get:25 http://kali.download/kali kali-rolling/main amd64 libx11-dev amd64 2:1.8.10-2 [891 kB]
+Get:26 http://http.kali.org/kali kali-rolling/main amd64 libxt-dev amd64 1:1.2.1-1.2+b1 [407 kB]
+Get:27 http://kali.download/kali kali-rolling/main amd64 util-linux-locales all 2.40.2-11 [2,905 kB]
+Get:18 http://ftp.free.fr/pub/kali kali-rolling/main amd64 x11proto-dev all 2024.1-1 [603 kB]
+Get:20 http://ftp.free.fr/pub/kali kali-rolling/main amd64 uuid-dev amd64 2.40.2-11 [47.2 kB]
+Fetched 503 MB in 1min 8s (7,386 kB/s)
+(Reading database ... 129246 files and directories currently installed.)
+Preparing to unpack .../bsdutils_1%3a2.40.2-11_amd64.deb ...
+Unpacking bsdutils (1:2.40.2-11) over (1:2.40.2-9) ...
+Setting up bsdutils (1:2.40.2-11) ...
+(Reading database ... 129246 files and directories currently installed.)
+Preparing to unpack .../login_1%3a4.16.0-2+really2.40.2-11_amd64.deb ...
+Unpacking login (1:4.16.0-2+really2.40.2-11) over (1:4.16.0-2+really2.40.2-9) ...
+Setting up login (1:4.16.0-2+really2.40.2-11) ...
+(Reading database ... 129246 files and directories currently installed.)
+Preparing to unpack .../eject_2.40.2-11_amd64.deb ...
+Unpacking eject (2.40.2-11) over (2.40.2-9) ...
+Preparing to unpack .../bsdextrautils_2.40.2-11_amd64.deb ...
+Unpacking bsdextrautils (2.40.2-11) over (2.40.2-9) ...
+Preparing to unpack .../util-linux-extra_2.40.2-11_amd64.deb ...
+Leaving 'diversion of /sbin/ctrlaltdel to /sbin/ctrlaltdel.usr-is-merged by util-linux-extra'
+Leaving 'diversion of /sbin/fsck.cramfs to /sbin/fsck.cramfs.usr-is-merged by util-linux-extra'
+Leaving 'diversion of /sbin/fsck.minix to /sbin/fsck.minix.usr-is-merged by util-linux-extra'
+Leaving 'diversion of /sbin/mkfs.bfs to /sbin/mkfs.bfs.usr-is-merged by util-linux-extra'
+Leaving 'diversion of /sbin/mkfs.cramfs to /sbin/mkfs.cramfs.usr-is-merged by util-linux-extra'
+Leaving 'diversion of /sbin/mkfs.minix to /sbin/mkfs.minix.usr-is-merged by util-linux-extra'
+Unpacking util-linux-extra (2.40.2-11) over (2.40.2-9) ...
+Preparing to unpack .../fdisk_2.40.2-11_amd64.deb ...
+Unpacking fdisk (2.40.2-11) over (2.40.2-9) ...
+Preparing to unpack .../libsmartcols1_2.40.2-11_amd64.deb ...
+Unpacking libsmartcols1:amd64 (2.40.2-11) over (2.40.2-9) ...
+Setting up libsmartcols1:amd64 (2.40.2-11) ...
+(Reading database ... 129242 files and directories currently installed.)
+Preparing to unpack .../libblkid1_2.40.2-11_amd64.deb ...
+Unpacking libblkid1:amd64 (2.40.2-11) over (2.40.2-9) ...
+Setting up libblkid1:amd64 (2.40.2-11) ...
+(Reading database ... 129242 files and directories currently installed.)
+Preparing to unpack .../libmount1_2.40.2-11_amd64.deb ...
+Unpacking libmount1:amd64 (2.40.2-11) over (2.40.2-9) ...
+Setting up libmount1:amd64 (2.40.2-11) ...
+(Reading database ... 129242 files and directories currently installed.)
+Preparing to unpack .../mount_2.40.2-11_amd64.deb ...
+Unpacking mount (2.40.2-11) over (2.40.2-9) ...
+Preparing to unpack .../libuuid1_2.40.2-11_amd64.deb ...
+Unpacking libuuid1:amd64 (2.40.2-11) over (2.40.2-9) ...
+Setting up libuuid1:amd64 (2.40.2-11) ...
+(Reading database ... 129242 files and directories currently installed.)
+Preparing to unpack .../util-linux_2.40.2-11_amd64.deb ...
+Unpacking util-linux (2.40.2-11) over (2.40.2-9) ...
+Setting up util-linux (2.40.2-11) ...
+fstrim.service is a disabled or a static unit not running, not starting it.
+(Reading database ... 129239 files and directories currently installed.)
+Preparing to unpack .../00-libfdisk1_2.40.2-11_amd64.deb ...
+Unpacking libfdisk1:amd64 (2.40.2-11) over (2.40.2-9) ...
+Selecting previously unselected package openjdk-17-jdk-headless:amd64.
+Preparing to unpack .../01-openjdk-17-jdk-headless_17.0.13+11-2_amd64.deb ...
+Unpacking openjdk-17-jdk-headless:amd64 (17.0.13+11-2) ...
+Selecting previously unselected package openjdk-17-jdk:amd64.
+Preparing to unpack .../02-openjdk-17-jdk_17.0.13+11-2_amd64.deb ...
+Unpacking openjdk-17-jdk:amd64 (17.0.13+11-2) ...
+Selecting previously unselected package ghidra.
+Preparing to unpack .../03-ghidra_11.0+ds-0kali1_amd64.deb ...
+Unpacking ghidra (11.0+ds-0kali1) ...
+Selecting previously unselected package ghidra-data.
+Preparing to unpack .../04-ghidra-data_10.5-0kali1_all.deb ...
+Unpacking ghidra-data (10.5-0kali1) ...
+Selecting previously unselected package xorg-sgml-doctools.
+Preparing to unpack .../05-xorg-sgml-doctools_1%3a1.11-1.1_all.deb ...
+Unpacking xorg-sgml-doctools (1:1.11-1.1) ...
+Selecting previously unselected package x11proto-dev.
+Preparing to unpack .../06-x11proto-dev_2024.1-1_all.deb ...
+Unpacking x11proto-dev (2024.1-1) ...
+Selecting previously unselected package libice-dev:amd64.
+Preparing to unpack .../07-libice-dev_2%3a1.1.1-1_amd64.deb ...
+Unpacking libice-dev:amd64 (2:1.1.1-1) ...
+Selecting previously unselected package uuid-dev:amd64.
+Preparing to unpack .../08-uuid-dev_2.40.2-11_amd64.deb ...
+Unpacking uuid-dev:amd64 (2.40.2-11) ...
+Selecting previously unselected package libsm-dev:amd64.
+Preparing to unpack .../09-libsm-dev_2%3a1.2.4-1_amd64.deb ...
+Unpacking libsm-dev:amd64 (2:1.2.4-1) ...
+Selecting previously unselected package libxau-dev:amd64.
+Preparing to unpack .../10-libxau-dev_1%3a1.0.11-1_amd64.deb ...
+Unpacking libxau-dev:amd64 (1:1.0.11-1) ...
+Selecting previously unselected package libxdmcp-dev:amd64.
+Preparing to unpack .../11-libxdmcp-dev_1%3a1.1.2-3+b2_amd64.deb ...
+Unpacking libxdmcp-dev:amd64 (1:1.1.2-3+b2) ...
+Selecting previously unselected package xtrans-dev.
+Preparing to unpack .../12-xtrans-dev_1.4.0-1_all.deb ...
+Unpacking xtrans-dev (1.4.0-1) ...
+Selecting previously unselected package libxcb1-dev:amd64.
+Preparing to unpack .../13-libxcb1-dev_1.17.0-2+b1_amd64.deb ...
+Unpacking libxcb1-dev:amd64 (1.17.0-2+b1) ...
+Selecting previously unselected package libx11-dev:amd64.
+Preparing to unpack .../14-libx11-dev_2%3a1.8.10-2_amd64.deb ...
+Unpacking libx11-dev:amd64 (2:1.8.10-2) ...
+Selecting previously unselected package libxt-dev:amd64.
+Preparing to unpack .../15-libxt-dev_1%3a1.2.1-1.2+b1_amd64.deb ...
+Unpacking libxt-dev:amd64 (1:1.2.1-1.2+b1) ...
+Preparing to unpack .../16-util-linux-locales_2.40.2-11_all.deb ...
+Unpacking util-linux-locales (2.40.2-11) over (2.40.2-9) ...
+Setting up bsdextrautils (2.40.2-11) ...
+Setting up eject (2.40.2-11) ...
+Setting up xtrans-dev (1.4.0-1) ...
+Setting up uuid-dev:amd64 (2.40.2-11) ...
+Setting up openjdk-17-jdk-headless:amd64 (17.0.13+11-2) ...
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jar to provide /usr/bin/jar (jar) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jarsigner to provide /usr/bin/jarsigner (jarsigner) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/javac to provide /usr/bin/javac (javac) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/javadoc to provide /usr/bin/javadoc (javadoc) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/javap to provide /usr/bin/javap (javap) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jcmd to provide /usr/bin/jcmd (jcmd) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jdb to provide /usr/bin/jdb (jdb) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jdeprscan to provide /usr/bin/jdeprscan (jdeprscan) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jdeps to provide /usr/bin/jdeps (jdeps) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jfr to provide /usr/bin/jfr (jfr) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jimage to provide /usr/bin/jimage (jimage) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jinfo to provide /usr/bin/jinfo (jinfo) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jlink to provide /usr/bin/jlink (jlink) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jmap to provide /usr/bin/jmap (jmap) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jmod to provide /usr/bin/jmod (jmod) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jps to provide /usr/bin/jps (jps) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jrunscript to provide /usr/bin/jrunscript (jrunscript) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jshell to provide /usr/bin/jshell (jshell) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jstack to provide /usr/bin/jstack (jstack) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jstat to provide /usr/bin/jstat (jstat) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jstatd to provide /usr/bin/jstatd (jstatd) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/serialver to provide /usr/bin/serialver (serialver) in auto mode
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jhsdb to provide /usr/bin/jhsdb (jhsdb) in auto mode
+Setting up ghidra-data (10.5-0kali1) ...
+Setting up libfdisk1:amd64 (2.40.2-11) ...
+Setting up mount (2.40.2-11) ...
+Setting up xorg-sgml-doctools (1:1.11-1.1) ...
+Setting up util-linux-locales (2.40.2-11) ...
+Setting up util-linux-extra (2.40.2-11) ...
+Setting up openjdk-17-jdk:amd64 (17.0.13+11-2) ...
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jconsole to provide /usr/bin/jconsole (jconsole) in auto mode
+Setting up fdisk (2.40.2-11) ...
+Setting up ghidra (11.0+ds-0kali1) ...
+Processing triggers for libc-bin (2.40-3) ...
+Processing triggers for man-db (2.11.2-2) ...
+Processing triggers for sgml-base (1.31) ...
+Processing triggers for mailcap (3.70+nmu1) ...
+Setting up x11proto-dev (2024.1-1) ...
+Setting up libxau-dev:amd64 (1:1.0.11-1) ...
+Setting up libice-dev:amd64 (2:1.1.1-1) ...
+Setting up libsm-dev:amd64 (2:1.2.4-1) ...
+Setting up libxdmcp-dev:amd64 (1:1.1.2-3+b2) ...
+Setting up libxcb1-dev:amd64 (1.17.0-2+b1) ...
+Setting up libx11-dev:amd64 (2:1.8.10-2) ...
+Setting up libxt-dev:amd64 (1:1.2.1-1.2+b1) ...
+```
+
+## 2. Patch manuel programme simple
+🌞 Récupérez le code de password_2.c sur la machine Linux et compilez-le
+```sh
+nathan@ServeurDebian:~/work$ cat > password_2.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <openssl/md5.h>
+#include <unistd.h>
+
+#define HASH_SIZE 16
+
+const unsigned char correct_hash[HASH_SIZE] = {
+    0x88, 0x1e, 0xbd, 0xd1, 0x5d, 0x8c, 0x07, 0xd9, 0xc3, 0xff, 0xbb, 0x24, 0xfa, 0xc4, 0x3b, 0x1f
+};
+
+void spawn_shell() {
+    printf("Access granted! Spawning shell...\n");
+    execve("/bin/sh", NULL, NULL);
+}
+
+void compute_md5(const char *str, unsigned char *result) {
+
+    MD5_CTX ctx;
+    MD5_Init(&ctx);
+    MD5_Update(&ctx, str, strlen(str));
+    MD5_Final(result, &ctx);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <password>\n", argv[0]);
+        return 1;
+    }
+
+    unsigned char hash[HASH_SIZE];
+    compute_md5(argv[1], hash);
+
+    if (memcmp(hash, correct_hash, HASH_SIZE) == 0) {
+        spawn_shell();
+    } else {
+        fprintf(stderr, "Access denied.\n");
+    }
+
+    return 0;
+}
+```
+
+
 
 
 
