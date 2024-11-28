@@ -2,11 +2,11 @@
 
 ## I. Programme minimal
 
+🌞 Créer un répertoire de travail dans votre répertoire personnel ( work)
+```sh
 nathan@ServeurDebian:~$ mkdir work
-
 nathan@ServeurDebian:~$ cd work
-
-
+```
 ### 1. Compilation
 
 ```sh
@@ -10116,12 +10116,14 @@ int main(int argc, char *argv[]) {
 }
 ```
 
+
 ### 4. Ptit chall maison
+
 🌞 Récupérer le flag du programme kaddate_challenge
 
 * téléchargez le programme depuis votre machine Linux (avec une commande wget)
   ```sh
-nathan@ServeurDebian:~$ wget https://gitlab.com/it4lik/b1-os/-/raw/main/tp/5/kaddate_challenge0
+nathan@ServeurDebian:~/work$ wget https://gitlab.com/it4lik/b1-os/-/raw/main/tp/5/kaddate_challenge0
 --2024-11-27 20:04:41--  https://gitlab.com/it4lik/b1-os/-/raw/main/tp/5/kaddate_challenge
 Resolving gitlab.com (gitlab.com)... 172.65.251.78, 2606:4700:90:0:f22e:fbec:5bed:a9b9
 Connecting to gitlab.com (gitlab.com)|172.65.251.78|:443... connected.
@@ -10161,7 +10163,7 @@ ELF Header:
 
  * get the flag !
   ```sh
-nathan@ServeurDebian:~$ ./kaddate_challenge
+nathan@ServeurDebian:~/work$ ./kaddate_challenge
 Can you be the first to send us a Message ?
 Enter you message:
 ougcfgnc bvnkiugcf
