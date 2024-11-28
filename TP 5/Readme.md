@@ -10120,7 +10120,7 @@ int main(int argc, char *argv[]) {
 ### 4. Ptit chall maison
 
 🌞 Récupérer le flag du programme kaddate_challenge
-
+```sh
 * téléchargez le programme depuis votre machine Linux (avec une commande wget)
   ```sh
 nathan@ServeurDebian:~/work$ wget https://gitlab.com/it4lik/b1-os/-/raw/main/tp/5/kaddate_challenge0
