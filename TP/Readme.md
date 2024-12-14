@@ -112,6 +112,18 @@ nathan
 nathan:x:1000:1000:nathan:/home/nathan:/bin/bash
 [nathan@node1 ~]$ cat /etc/passwd | grep $USER | cut -d' ' -f7
 nathan:x:1000:1000:nathan:/home/nathan:/bin/bash
+
+
+```sh
+[nathan@node1 ~]$ rpm --query --queryformat "%{NAME} %{ARCH}\n" -a | grep ssh
+libssh-config noarch
+libssh x86_64
+openssh x86_64
+openssh-clients x86_64
+openssh-server x86_64
+[nathan@node1 ~]$ rpm --query --queryformat "%{NAME} %{ARCH}\n" -a | grep -c ssh
+5
+```
 [nathan@node1 ~]$ cat /etc/passwd | grep $USER | tr -s " " |  cut -d' ' -f7
 nathan:x:1000:1000:nathan:/home/nathan:/bin/bash
 [nathan@node1 ~]$ cat /etc/passwd | grep $USER | cut -d: -f7
