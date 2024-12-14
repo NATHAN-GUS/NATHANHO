@@ -129,4 +129,12 @@ openssh-server x86_64
 [nathan@node1 ~]$ rpm --query --queryformat "%{NAME} %{ARCH}\n" -a | grep -c ssh
 5
 
+
+
+[nathan@node1 ~]$ sudo ss -lnpt | grep sshd | tr -s ' ' | cut -d' ' -f4
+0.0.0.0:22
+[::]:22
+[nathan@node1 ~]$ sudo ss -lnpt | grep sshd | tr -s ' ' | cut -d' ' -f4 | cut -d':' -f2
+22
+
 ```
